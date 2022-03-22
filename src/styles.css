@@ -1,0 +1,9 @@
+body {
+  width: 100vw;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+.link {
+  text-decoration: none;
+}
