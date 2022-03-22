@@ -1,4 +1,4 @@
-import { v4 as uuid } from "uuid";
+// import { v4 as uuid } from "uuid";
 
 /**
  * Category Database can be added here.
@@ -7,21 +7,43 @@ import { v4 as uuid } from "uuid";
 
 export const categories = [
   {
-    _id: uuid(),
-    categoryName: "fiction",
-    description:
-      "literature in the form of prose, especially novels, that describes imaginary events and people",
+    _id: 1,
+    categoryName: "Cake",
+    image:"assets/category-cake.jpg",
   },
   {
-    _id: uuid(),
-    categoryName: "non-fiction",
-    description:
-      "Non-fiction is writing that gives information or describes real events, rather than telling a story.",
+    _id: 2,
+    categoryName: "Pastries and Cupcakes",
+    image:"assets/category-cupcakes.jpg"
   },
   {
-    _id: uuid(),
-    categoryName: "horror",
-    description:
-      "Meant to cause discomfort and fear for both the character and readers, horror writers often make use of supernatural and paranormal elements in morbid stories that are sometimes a little too realistic.",
+    _id: 3,
+    categoryName: "Brownies and Dry Cakes",
+    image: "assets/category-brownies.jpg"
+  },
+  {
+    _id: 4,
+    categoryName: "Jar Desserts",
+    image:"assets/category-jar-cake.jpg",
+  },
+  {
+    _id: 5,
+    categoryName: "Chocolates",
+    image:"assets/category-chocolates.jpg"
+  },
+  {
+    _id: 6,
+    categoryName: "Cookies",
+    image: "assets/category-cookies.jpg"
+  },
+  {
+    _id: 7,
+    categoryName: "Donuts",
+    image:"assets/category-donuts.jpg"
+  },
+  {
+    _id: 8,
+    categoryName: "Gift Hampers",
+    image: "assets/category-gift-hampers.jpg"
   },
 ];
