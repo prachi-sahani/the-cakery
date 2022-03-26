@@ -5,17 +5,18 @@ import App from "./App";
 import { makeServer } from "./server";
 import { BrowserRouter } from "react-router-dom";
 import { DBdataProvider } from "./context/db-data-context";
+import { ProductProvider } from "./context/product.page.context";
 
 // Call make Server
 makeServer();
 
 ReactDOM.render(
   <React.StrictMode>
-    <DBdataProvider>
-      <BrowserRouter>
+    <BrowserRouter>
+      <DBdataProvider>
         <App />
-      </BrowserRouter>
-    </DBdataProvider>
+      </DBdataProvider>
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById("root")
 );
