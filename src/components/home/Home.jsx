@@ -1,10 +1,21 @@
 import { Link } from "react-router-dom";
-import { useDBdata } from "../../context/db-data-context";
+import { useEffect } from "react";
+import { useDBdata } from "../../context/index";
 import { CategoryCard } from "./CategoryCard";
+import { Loader } from "../loader/Loader";
+import { getCategories } from "../../utilities/server-request/server-request";
 import "./home.css";
 
 export function Home() {
-  const { categories } = useDBdata();
+  const {dataState, dataDispatch } = useDBdata();
+  useEffect(() => {
+    if (!dataState.categories.length) {
+      (async () => {
+        const categoriesData = await getCategories(dataDispatch);
+        dataDispatch({ type: "CATEGORIES", payload: categoriesData.data.categories });
+      })()
+    }
+  },[])
   return (
     <main>
       {/* hero image */}
@@ -24,11 +35,14 @@ export function Home() {
       </div>
 
       {/* category list */}
+       
       <div className="category-cards my-2">
-        {categories.map((category) => (
+        {dataState.categories.map((category) => (
           <CategoryCard key={category._id} category={category} />
         ))}
-      </div>
+      </div> 
+      {!dataState.categories.length && <Loader/>}
+
     </main>
   );
 }
