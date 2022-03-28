@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
 import "./footer.css";
+
 export function Footer() {
   return (
-    <footer className="footer mt-4">
+    <footer className="footer">
       <div className="footer-upper">
         <ul className="footer-quick-links list-group txt-left">
           <h4 className="headings h4">Quick Links</h4>
