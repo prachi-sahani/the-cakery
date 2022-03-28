@@ -1,7 +1,7 @@
 import "./products.css";
 import "../../styles.css";
 import { ProductCard } from "./ProductCard";
-import { useProductPageData } from "../../context/product.page.context";
+import { useProductPageData } from "../../context/index";
 import { FilterTags } from "./FilterTags";
 
 export function ProductList() {

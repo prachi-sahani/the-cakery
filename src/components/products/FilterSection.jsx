@@ -1,6 +1,6 @@
 import "./products.css";
 import "../../styles.css";
-import { useProductPageData } from "../../context/product.page.context";
+import { useProductPageData } from "../../context/index";
 
 export function FilterSection() {
   const { filterSortState, filterSortDispatch } = useProductPageData();

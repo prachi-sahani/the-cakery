@@ -1,4 +1,4 @@
-import { useProductPageData } from "../../context/product.page.context"
+import { useProductPageData } from "../../context/index"
 
 export function FilterTags(){
     const { filtersList } = useProductPageData();
