@@ -1,6 +1,7 @@
 import "./loader.css"
+
 export function Loader(){
     return(
-        <h1 className="heading h1 loadingMessage">Loading...</h1>
+        <h2 className="heading h2 loadingMessage txt-center">Loading...</h2>
     )
 }
