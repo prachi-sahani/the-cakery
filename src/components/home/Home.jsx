@@ -8,14 +8,16 @@ import "./home.css";
 
 export function Home() {
   const {dataState, dataDispatch } = useDBdata();
+
   useEffect(() => {
     if (!dataState.categories.length) {
       (async () => {
-        const categoriesData = await getCategories(dataDispatch);
+        const categoriesData = await getCategories();
         dataDispatch({ type: "CATEGORIES", payload: categoriesData.data.categories });
       })()
     }
   },[])
+ 
   return (
     <main>
       {/* hero image */}

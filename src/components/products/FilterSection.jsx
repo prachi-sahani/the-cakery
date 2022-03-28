@@ -4,6 +4,7 @@ import { useProductPageData } from "../../context/index";
 
 export function FilterSection() {
   const { filterSortState, filterSortDispatch } = useProductPageData();
+  
   return (
     <div className="filter-section p-4">
       <div className="txt txt-bold">Sorting</div>
@@ -178,6 +179,27 @@ export function FilterSection() {
           }
         />
         <label htmlFor="category">Jar deserts</label>
+      </p>
+      <p className="txt checkbox-input-group">
+        <input
+          type="checkbox"
+          name="category"
+          value="cookies"
+          checked={
+            filterSortState.filterByCategory.findIndex(
+              (item) => item === "COOKIES"
+            ) < 0
+              ? false
+              : true
+          }
+          onChange={(e) =>
+            filterSortDispatch({
+              type: "FILTER_BY_CATEGORY",
+              payload: { checked: e.target.checked, value: "COOKIES" },
+            })
+          }
+        />
+        <label htmlFor="category">Cookies</label>
       </p>
       <p className="txt checkbox-input-group">
         <input
