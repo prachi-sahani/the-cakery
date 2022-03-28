@@ -1,4 +1,4 @@
-// import { v4 as uuid } from "uuid";
+import { v4 as uuid } from "uuid";
 
 /**
  * Product Database can be added here.
@@ -7,7 +7,7 @@
 
 export const products = [
   {
-    _id: 1,
+    _id: uuid(),
     title: "Red Velvet Cake",
     description:
       "Dreamy creamy red velvet cake with cheese cream & white chocolate garnish on top is finally here! From its flaky, red velvet crumbs on its sides to its creamy crown, everything about this cake is sure to leave you drooling.",
@@ -19,7 +19,7 @@ export const products = [
     tag: "BESTSELLER"
   },
   {
-    _id: 2,
+    _id: uuid(),
     title: "Ravishing Truffle Chocolate Cake",
     description:
       "Enriched with the finest exotic chocolates, this delicious cake is garnished with white fondant, chocolate sponge crumb and dusted with cocoa powder.",
@@ -31,7 +31,7 @@ export const products = [
     tag: ""
   },
   {
-    _id: 3,
+    _id: uuid(),
     title: "Choco Chip Truffle N Kit Kat Delight Pastries",
     description: "Make the best impressions on your sweet tooth loved ones on special occasions with a lip-smacking chocolate chip truffle Kit Kat pastries. These heart-warming gift comes in a salivating arrangement in three parts that has two pastries decorated with Chocolate chips, truffle, and Kit Kat Bars.",
     price: 649,
@@ -42,7 +42,7 @@ export const products = [
     tag: ""
   },
   {
-    _id: 4,
+    _id: uuid(),
     title: "Red Velvet Single Jar Cake",
     description: "Nothing matches to the goodness of a delectable red velvet jar cake and when it comes as a jar cake, it is sure to spread happiness and other good feelings to your loved ones. So, what's the wait for? Be it, any special occasion turn it into the best possible one by celebrating it over a rich, velvety smooth jar cake, like this.",
     price: 149,
@@ -53,7 +53,7 @@ export const products = [
     tag: "BESTSELLER"
   },
   {
-    _id: 5,
+    _id: uuid(),
     title: "Chocolaty Creamy Round Cake",
     description: "This round chocolaty cake is the perfect treat for someone who is absolutely in love with chocolate cakes. This cake covered in rich chocolate ganache and decorated with chocolate shavings is the best gift one can have on their special day.",
     price: 699,
@@ -64,7 +64,7 @@ export const products = [
     tag: ""
   },
   {
-    _id: 6,
+    _id: uuid(),
     title: "Chocolate Truffle Pastry",
     description: "This pastry is all about perfection. Made from the finest quality of chocolate, this delicious pastry proudly boasts lips-smacking chocolate covering and cherry decoration. This pastry has been given an awesome touch with the liquid chocolate cream.",
     price: 149,
@@ -75,7 +75,7 @@ export const products = [
     tag: ""
   },
   {
-    _id: 7,
+    _id: uuid(),
     title: "Set Of 6 Choco Love Brownies",
     description: "A perfectly baked set of six delicious and dense chocolate brownies can take your taste buds on a sweetly scrumptious ride. Two brownies are topped with colorful sprinkles, two are decorated with edible hearts, and the other two delights with red cream spread over them in zig-zag.",
     price: 649,
@@ -86,7 +86,7 @@ export const products = [
     tag: ""
   },
   {
-    _id: 8,
+    _id: uuid(),
     title: "Delicious Cake and Cookie Hamper",
     description: "Celebrate birthdays, holidays or just everyday occasions with this delicious berry almond dry cake (300 gm) and cookie hamper. It's packed with tasty favorites like cookies, cakes, and jar cakes (200 ml each). A perfect and happy delight for all ages. This is a perfect gift hamper to surprise your loved ones.",
     price: 1499,
@@ -97,7 +97,7 @@ export const products = [
     tag: ""
   },
   {
-    _id: 9,
+    _id: uuid(),
     title: "6 Blueberry Pineapple Vanilla Cupcakes",
     description: "Treat your taste buds with an assortment of 6 delicious and moist cupcakes. Satiate your senses to the rich flavours of blueberry, pineapple, and vanilla with thick dollops of vanilla frosting and alluring toppers. Get a hit of pure flavour in every bite!",
     price: 599,
@@ -108,7 +108,7 @@ export const products = [
     tag: ""
   },
   {
-    _id: 10,
+    _id: uuid(),
     title: "Layered Cocoa Choco Chip Pastry",
     description: "Grab this fantastic and classic chocolate pastry for the cocoa lovers in your life. layered with soft choco frosting on the top and sprinkled with incredibly tasty chocolate chips, this pastry is divine to the core, giving hints of signature flavors in every bite!",
     price: 199,
@@ -119,7 +119,7 @@ export const products = [
     tag: ""
   },
   {
-    _id: 11,
+    _id: uuid(),
     title: "Celebration Round Chocolate Box",
     description: "Box Contains- Love Shape Dark Chocolate Praline, Almond & Black Currant Rocher with Edible Gold Dust, 5 Spiced Dark Chocolate Truffles, Pistachio Truffle, Chocolate Fudge, Salted Caramel Chocolate Praline, Peanut Butter White Chocolate, Red Velvet, Hazelnut, Lemon Citrus, Coconut Bounty, Lips Shape Strawberry Truffle, 2 Berry Pralines, 2 Biscoffs , 2 Dark Chocolate, Velvet Milk Chocolate Pralines and Double Chocolate Pralines.",
     price: 499,
