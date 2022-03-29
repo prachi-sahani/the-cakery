@@ -12,7 +12,7 @@ export function ProductCard({ product }) {
   const navigate = useNavigate()
   const isProductInWishlist = dataState.wishlist?.findIndex(item => item._id === product._id) >= 0;
   const [wishlistIcon, setWishlistIcon] = useState(isProductInWishlist? "favorite" : "favorite_border")
-  function takeAction(){
+  function cartAction(){
     // if user is logged in then only add items to cart
     if(authToken){
       setActionText("LOADING...")
@@ -108,7 +108,7 @@ export function ProductCard({ product }) {
       </div>
       <div className="card-footer">
         <div className="action-button">
-          <button className="btn-basic btn-primary" disabled={actionText === "LOADING..."} onClick={takeAction}>{actionText}</button>
+          <button className="btn-basic btn-primary" disabled={actionText === "LOADING..."} onClick={cartAction}>{actionText}</button>
         </div>
       </div>
     </div>

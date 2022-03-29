@@ -1,37 +1,49 @@
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import { useAuth, useDBdata } from "../../context/index";
 import { addToCart, removeFromWishlist, updateCart } from "../../utilities/server-request/server-request";
 import "./wishlistPage.css";
 
 export function WishlistItemCard({ product }) {
   const {authToken} = useAuth();
-  const { dataState, dataDispatch} = useDBdata()
-  function takeAction(){
-      const isProductInCart = dataState.cart.findIndex(item => item._id === product._id) >= 0;
-      if(isProductInCart){
-        (async () => {
-          const updatedCart = await updateCart(authToken, product._id, "increment")
-          if(updatedCart){
-            dataDispatch({ type: "CART", payload: updatedCart.data.cart });
-          }
-          else{
-            // show error snackbar
-          }
-        })()
+  const { dataState, dataDispatch} = useDBdata();
+  const [actionText, setActionText] = useState("ADD TO CART");
+  const navigate = useNavigate()
+  function cartAction(){
+      setActionText("LOADING...")
+      if(actionText === "ADD TO CART"){
+        const isProductInCart = dataState.cart?.findIndex(item => item._id === product._id) >= 0;
+        if(isProductInCart){
+          (async () => {
+            const updatedCart = await updateCart(authToken, product._id, "increment")
+            if(updatedCart){
+              dataDispatch({ type: "CART", payload: updatedCart.data.cart });
+              setActionText("GO TO CART")
+            }
+            else{
+              // show error snackbar
+              setActionText("ADD TO CART")
+            }
+          })()
+        }
+        else{
+          (async () => {
+            const updatedCart = await addToCart(authToken, product);
+            if(updatedCart){
+              dataDispatch({ type: "CART", payload: updatedCart.data.cart });
+              setActionText("GO TO CART");
+            }
+            else{
+              // show error snackbar
+            }
+          })()
+        }
       }
       else{
-        (async () => {
-          const updatedCart = await addToCart(authToken, dataDispatch, product);
-          if(updatedCart){
-            dataDispatch({ type: "CART", payload: updatedCart.data.cart });
-          }
-          else{
-            // show error snackbar
-          }
-        })()
+        navigate("/cart")
       }
-   
+    
   }
-
   async function removeItem(){
     const updatedWishlist = await removeFromWishlist(authToken, product._id)
     dataDispatch({ type: "WISHLIST", payload: updatedWishlist.data.wishlist });
@@ -74,7 +86,7 @@ export function WishlistItemCard({ product }) {
       </div>
       <div className="card-footer">
         <div className="action-button">
-          <button className="btn-basic btn-primary" onClick={takeAction}>ADD TO CART</button>
+          <button className="btn-basic btn-primary" onClick={cartAction}>{actionText}</button>
         </div>
       </div>
     </div>
