@@ -9,7 +9,7 @@ export const categories = [
   {
     _id: uuid(),
     categoryName: "Cake",
-    categoryIdentity:"CAKE",
+    categoryIdentity:"CAKES",
     image:"assets/category-cake.jpg",
   },
   {
