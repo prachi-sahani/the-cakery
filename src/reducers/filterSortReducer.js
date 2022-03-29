@@ -12,12 +12,12 @@ export function filterSortReducer(state, action) {
     case "FILTER_BY_CATEGORY": {
       let categoryArray = [...state.filterByCategory];
       if (action.payload.checked) {
-        categoryArray = isCategoryPresent(action.payload, categoryArray)
+        categoryArray = isCategoryPresent(action.payload.value, categoryArray)
           ? [...categoryArray]
-          : [...categoryArray, action.payload];
+          : [...categoryArray, action.payload.value];
       } else {
-        categoryArray = isCategoryPresent(action.payload, categoryArray)
-          ? categoryArray.filter((item) => item !== action.payload)
+        categoryArray = isCategoryPresent(action.payload.value, categoryArray)
+          ? categoryArray.filter((item) => item !== action.payload.value)
           : [...categoryArray];
       }
       return { ...state, filterByCategory: categoryArray };
