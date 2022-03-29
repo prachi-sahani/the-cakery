@@ -1,0 +1,39 @@
+.wishlist-page {
+  min-height: calc(100vh - 21.5rem);
+}
+
+.txt-my-wishlist {
+  color: var(--black-600);
+}
+
+.product-card {
+  max-width: 21%;
+}
+
+.product-card .btn-close {
+  top: 4px;
+  right: 4px;
+}
+
+.product-card .overlay,
+.product-card .btn-close {
+  z-index: 1;
+}
+
+@media screen and (max-width: 1050px) {
+  .product-card {
+    max-width: 27%;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .product-card {
+    max-width: 40%;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .product-card {
+    max-width: 100%;
+  }
+}
