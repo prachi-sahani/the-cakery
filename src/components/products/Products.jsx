@@ -1,19 +1,26 @@
-import { useDBdata } from "../../context/db-data-context";
-import { ProductProvider } from "../../context/product.page.context";
+import { useEffect } from "react";
+import { useDBdata } from "../../context/index";
+import { getProducts } from "../../utilities/server-request/server-request";
 import { Loader } from "../loader/Loader";
 import { FilterSection } from "./FilterSection";
 import { ProductList } from "./ProductList";
+
 export function Products() {
-  const { productsLoading } = useDBdata();
+  const { dataState, dataDispatch } = useDBdata();
+  useEffect(() => {
+    if (!dataState.products.length) {
+      (async () => {
+        const productsData =  await getProducts();
+        dataDispatch({ type: "PRODUCTS", payload: productsData.data.products });
+      }
+      )()
+    }
+  },[])
   return (
-    <ProductProvider>
       <main className="product-page">
-        {!productsLoading && <FilterSection />}
-        {!productsLoading && <ProductList />}
-        {productsLoading && 
-          <Loader/>
-        }
+        {dataState.products.length>0 && <FilterSection />}
+        {dataState.products.length>0 && <ProductList />}
+        {dataState.products.length === 0 && <Loader />}
       </main>
-    </ProductProvider>
   );
 }

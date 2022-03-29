@@ -5,7 +5,7 @@ import{getFilteredProductArray, getSortedProductArray, getFiltersList } from '..
 const ProductPageContext = createContext();
 
 function ProductProvider({ children }) {
-  const { products } = useDBdata();
+  const { dataState } = useDBdata();
   const [filterSortState, filterSortDispatch] = useReducer(filterSortReducer, {
     sortBy: "",
     filterByCategory: [],
@@ -15,7 +15,7 @@ function ProductProvider({ children }) {
  
   const filteredProductArray = getFilteredProductArray(
     filterSortState,
-    products
+    dataState.products
   );
   const sortedProductArray = getSortedProductArray(
     filterSortState.sortBy,

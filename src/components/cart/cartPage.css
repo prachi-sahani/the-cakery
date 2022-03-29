@@ -1,0 +1,103 @@
+.cart-management {
+    min-height: calc(
+      100vh - 21.5rem
+    ); /* total viewport minus height of header and footer*/
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+  }
+  
+  /* cart total value  */
+  .cart-value-details {
+    min-width: 35%;
+    position: sticky;
+    top: 0;
+    height: 100%;
+    overflow-y: auto;
+    min-height: calc(100vh - 21.5rem);
+  }
+  
+  /* list of items in cart */
+  .cart-products-list {
+    min-width: 65%;
+    min-height: calc(100vh - 21.5rem);
+  }
+  
+  .qty-changer {
+    display: flex;
+    align-items: center;
+  }
+  .qty-increase,
+  .qty-decrease {
+    padding: 0 0.5rem;
+    font-size: 1.5rem;
+  }
+  
+  /* removing default hover style of icon button from component library */
+  .qty-increase:hover,
+  .qty-decrease:hover {
+    background: none;
+  }
+  
+  .qty {
+    border: thin solid var(--black-500);
+    padding: 2px 12px;
+    pointer-events: none;
+  }
+  
+  .cart-value-details .card,
+  .cart-products-list .card {
+    width: 90%;
+    object-fit: cover;
+  }
+  
+  .cart-products-list .card .card-img {
+    height: 13rem;
+    min-width: 35%;
+    max-width: auto;
+  }
+  
+  .price-details,
+  .pricing {
+    display: flex;
+    align-items: center;
+  }
+  
+  .price-details {
+    justify-content: space-between;
+  }
+  
+  .pricing i {
+    font-size: 1.1rem;
+  }
+  
+  .btn-place-order {
+    padding: 0.5rem 1rem;
+  }
+  
+  .cart-value-details .card .card-footer {
+    justify-content: center;
+  }
+  
+  .delivery-details {
+    align-self: flex-start;
+  }
+
+  .empty-cart{
+      min-height: calc(
+        100vh - 21.5rem
+      );
+  }
+  
+  @media screen and (max-width: 600px) {
+    .cart-management {
+      flex-direction: column-reverse;
+    }
+  
+    .cart-value-details {
+      position: static;
+      height: fit-content;
+      min-height: fit-content;
+    }
+  }
+  
