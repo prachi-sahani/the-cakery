@@ -4,7 +4,11 @@ import "./index.css";
 import App from "./App";
 import { makeServer } from "./server";
 import { BrowserRouter } from "react-router-dom";
-import { DBdataProvider, AuthProvider } from "./context/index.jsx";
+import {
+  DBdataProvider,
+  AuthProvider,
+  ProductProvider,
+} from "./context/index.jsx";
 
 // Call make Server
 makeServer();
@@ -14,7 +18,9 @@ ReactDOM.render(
     <BrowserRouter>
       <AuthProvider>
         <DBdataProvider>
-          <App />
+          <ProductProvider>
+            <App />
+          </ProductProvider>
         </DBdataProvider>
       </AuthProvider>
     </BrowserRouter>
