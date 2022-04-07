@@ -1,14 +1,19 @@
 import "./products.css";
 import "../../styles.css";
 import { useProductPageData } from "../../context/index";
+import { useMessageHandling } from "../../context/message-handling";
 
 export function FilterSection() {
   const { filterSortState, filterSortDispatch } = useProductPageData();
-  
-  return (
-    <div className="filter-section p-4">
-      <div className="txt txt-bold">Sorting</div>
+  const { showFilterSection, setShowFilterSection } = useMessageHandling();
 
+  return (
+    <div className={`${showFilterSection ? "filter-section-sm" : "filter-section"} p-4`}>
+       <div className="txt-right close-filter">
+          <button className="btn-icon material-icons btn-sm" onClick={()=>setShowFilterSection(false)}>clear</button>
+        </div>
+      <div className="txt txt-bold">Sorting</div>
+       
       {/* sort by discounted price */}
       <p className="txt radio-input-group">
         <input
