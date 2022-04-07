@@ -53,7 +53,7 @@ export const addItemToWishlistHandler = function (schema, request) {
       updatedAt: formatDate(),
     });
     this.db.users.update({ _id: userId }, { wishlist: userWishlist });
-    return new Response(201, {}, { wishlist: userWishlist });
+    return new Response(201, {}, { wishlist: userWishlist, message:"Item added to wishlist" });
   } catch (error) {
     return new Response(
       500,
@@ -87,7 +87,7 @@ export const removeItemFromWishlistHandler = function (schema, request) {
     const productId = request.params.productId;
     userWishlist = userWishlist.filter((item) => item._id !== productId);
     this.db.users.update({ _id: userId }, { wishlist: userWishlist });
-    return new Response(200, {}, { wishlist: userWishlist });
+    return new Response(200, {}, { wishlist: userWishlist, message:"Item removed from wishlist" });
   } catch (error) {
     return new Response(
       500,

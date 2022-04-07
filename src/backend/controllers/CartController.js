@@ -53,7 +53,7 @@ export const addItemToCartHandler = function (schema, request) {
       qty: 1,
     });
     this.db.users.update({ _id: userId }, { cart: userCart });
-    return new Response(201, {}, { cart: userCart });
+    return new Response(201, {}, { cart: userCart, message:"Item added to cart" });
   } catch (error) {
     return new Response(
       500,
@@ -86,7 +86,7 @@ export const removeItemFromCartHandler = function (schema, request) {
     const productId = request.params.productId;
     userCart = userCart.filter((item) => item._id !== productId);
     this.db.users.update({ _id: userId }, { cart: userCart });
-    return new Response(200, {}, { cart: userCart });
+    return new Response(200, {}, { cart: userCart, message:"Item removed from cart" });
   } catch (error) {
     return new Response(
       500,
@@ -135,7 +135,7 @@ export const updateCartItemHandler = function (schema, request) {
       });
     }
     this.db.users.update({ _id: userId }, { cart: userCart });
-    return new Response(200, {}, { cart: userCart });
+    return new Response(200, {}, { cart: userCart, message:"Item updated in cart" });
   } catch (error) {
     return new Response(
       500,
