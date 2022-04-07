@@ -1,11 +1,13 @@
 import "./navbar.css";
 import "../../styles.css";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { useAuth, useDBdata } from "../../context/index";
+import { useState } from "react";
 
 export function Navbar() {
   const { authToken, logout } = useAuth();
   const { dataState } = useDBdata();
+  const [showMenu, setShowMenu] = useState(false);
   return (
     <nav className="nav">
       <div className="navbar">
@@ -18,12 +20,12 @@ export function Navbar() {
         </Link>
         <div className="navbar-nav">
           <ul className="list-group-inline navbar-nav-list">
-            <Link className="link" to="/">
+            <NavLink className={({isActive}) => isActive? "txt-bold link" : "link"} to="/">
               <li className="txt-primary list-item">Home</li>
-            </Link>
-            <Link className="link" to="/products">
+            </NavLink>
+            <NavLink className={({isActive}) => isActive? "txt-bold link" : "link"} to="/products">
               <li className="txt-primary list-item">Order Now</li>
-            </Link>
+            </NavLink>
           </ul>
           <div className="navbar-action">
             {authToken ? (
@@ -54,7 +56,9 @@ export function Navbar() {
                 >
                   shopping_cart
                 </Link>
-                <div className="badge-icon-text badge-count">{dataState.cart?.length || 0}</div>
+                <div className="badge-icon-text badge-count">
+                  {dataState.cart?.length || 0}
+                </div>
               </div>
             ) : (
               <Link
@@ -85,23 +89,54 @@ export function Navbar() {
           </div>
         </div>
         <div className="navbar-menu">
-          <button className="navbar-menu-btn btn-basic btn-outline-primary material-icons btn-md">
+          <button
+            className="navbar-menu-btn btn-basic btn-outline-primary material-icons btn-md"
+            onClick={() => setShowMenu((value) => !value)}
+          >
             menu
           </button>
-          <ul className="navbar-menu-list list-group-stacked">
-            <Link className="link" to="/">
-              <li className="txt-primary list-item">Signup/Login </li>
-            </Link>
-            <Link className="link" to="/">
-              <li className="txt-primary list-item">Account</li>
-            </Link>
-            <Link className="link" to="/">
-              <li className="txt-primary list-item">Shopping Bag</li>
-            </Link>
-            <Link className="link" to="/">
-              <li className="txt-primary list-item">Wishlist</li>
-            </Link>
-          </ul>
+          {showMenu && (
+            <ul className="navbar-menu-list list-group-stacked">
+              {/* will add account page later */}
+              {/* <NavLink className={({isActive}) => isActive? "txt-primary link" : "link"} to="/"  onClick={() => setShowMenu(false)}>
+                <li className="txt-primary list-w-icon list-item"><i className="material-icons">add</i>Account</li>
+              </NavLink> */}
+              <Link
+                className="link"
+                to="/cart"
+                onClick={() => setShowMenu(false)}
+              >
+                <li className="txt-primary list-w-icon list-item"><i className="material-icons">shopping_cart</i>Shopping Bag</li>
+              </Link>
+              <Link
+                className="link"
+                to="/wishlist"
+                onClick={() => setShowMenu(false)}
+              >
+                <li className="txt-primary list-w-icon list-item"><i className="material-icons">favorite</i>Wishlist</li>
+              </Link>
+              {authToken ? (
+                <Link
+                  className="link"
+                  to="/"
+                  onClick={() => {
+                    setShowMenu(false);
+                    logout();
+                  }}
+                >
+                  <li className="txt-primary list-w-icon list-item"><i className="material-icons">logout</i>Logout</li>
+                </Link>
+              ) : (
+                <Link
+                  className="link"
+                  to="/login"
+                  onClick={() => setShowMenu(false)}
+                >
+                  <li className="txt-primary list-w-icon list-item"><i className="material-icons">login</i>Signup/Login </li>
+                </Link>
+              )}
+            </ul>
+          )}
         </div>
       </div>
     </nav>

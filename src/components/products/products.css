@@ -101,12 +101,34 @@
   .priceFilterInput{
     width: 100%;
   }
+
+  .close-filter{
+    display: none;
+  }
   /* specifically for responsiveness of cards displayed */
   @media screen and (max-width: 1050px) {
-    .filter-section {
-      /* display: none; */
+    .filter-section-sm{
+      position: fixed;
+      z-index: 1;
+      background-color: var(--black-inverted);
+      top: 4.75rem;
+      height: calc(100vh - 4.75rem);
+      overflow-y: auto;
     }
-  
+
+    .filter-section{
+      display: none;
+    }
+    .close-filter{
+      display: block;
+    }
+    .close-filter .btn-icon{
+      padding:0
+    }
+    .close-filter .btn-icon:hover{
+      background-color: transparent;
+    }
+
     .filter-toggle {
       display: inline-flex;
       align-items: center;
