@@ -9,6 +9,7 @@ import {
   AuthProvider,
   ProductProvider,
 } from "./context/index.jsx";
+import { MessageHandlingProvider } from "./context/message-handling";
 
 // Call make Server
 makeServer();
@@ -16,13 +17,15 @@ makeServer();
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-      <AuthProvider>
-        <DBdataProvider>
-          <ProductProvider>
-            <App />
-          </ProductProvider>
-        </DBdataProvider>
-      </AuthProvider>
+      <MessageHandlingProvider>
+        <AuthProvider>
+          <DBdataProvider>
+            <ProductProvider>
+              <App />
+            </ProductProvider>
+          </DBdataProvider>
+        </AuthProvider>
+      </MessageHandlingProvider>
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById("root")

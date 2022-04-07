@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useAuth, useDBdata } from "../../context/index";
+import { useMessageHandling } from "../../context/message-handling";
 import {
   addToWishlist,
   removeFromCart,
@@ -9,53 +10,56 @@ import {
 export function CartItemCard({ item, calculatePriceDetails }) {
   const { authToken } = useAuth();
   const { dataState, dataDispatch } = useDBdata();
-  const [ wishlistText, setWishlistText ]= useState("MOVE TO WISHLIST")
+  const [wishlistText, setWishlistText] = useState("MOVE TO WISHLIST");
+  const { showSnackbar } = useMessageHandling();
   const isProductInWishlist =
     dataState.wishlist?.findIndex((product) => item._id === product._id) >= 0;
 
   async function updateItem(type) {
-    const updatedCart = await updateCart(authToken, item._id, type);
-    if (updatedCart) {
+    try {
+      const updatedCart = await updateCart(authToken, item._id, type);
+      showSnackbar(updatedCart.data.message);
       dataDispatch({ type: "CART", payload: updatedCart.data.cart });
       calculatePriceDetails(updatedCart.data.cart);
-    } else {
-      // error in snackbar
+    } catch (err) {
+      showSnackbar("Some error occurred. Try Again!");
     }
   }
 
   async function removeItem() {
-    const updatedCart = await removeFromCart(authToken, item._id);
-    if (updatedCart) {
+    try {
+      const updatedCart = await removeFromCart(authToken, item._id);
+      showSnackbar(updatedCart.data.message);
       dataDispatch({ type: "CART", payload: updatedCart.data.cart });
       calculatePriceDetails(updatedCart.data.cart);
-    } else {
-      // error in snackbar
+    } catch (err) {
+      showSnackbar("Some error occurred. Try Again!");
     }
   }
 
   async function moveToWishlist() {
     if (!isProductInWishlist) {
-      setWishlistText("MOVING...")
-      // remove from cart and add to wishlist
-      const [updatedCart, updatedWishlist] = await Promise.all([
-        removeFromCart(authToken, item._id),
-        addToWishlist(authToken, item),
-      ]);
-      if (updatedCart && updatedWishlist) {
+      try {
+        setWishlistText("MOVING...");
+        // remove from cart and add to wishlist
+        const [updatedCart, updatedWishlist] = await Promise.all([
+          removeFromCart(authToken, item._id),
+          addToWishlist(authToken, item),
+        ]);
+        showSnackbar(updatedWishlist.data.message);
         calculatePriceDetails(updatedCart.data.cart);
         dataDispatch({ type: "CART", payload: updatedCart.data.cart });
         dataDispatch({
           type: "WISHLIST",
           payload: updatedWishlist.data.wishlist,
         });
-      } else {
-        setWishlistText("MOVE TO WISHLIST")
-        
-        // error msg in snackbar
+      } catch (err) {
+        showSnackbar("Some error occurred. Try Again!");
+        setWishlistText("MOVE TO WISHLIST");
       }
-    }
-    else{
-      // show message in snackbar - product already in wishlist
+    } else {
+      // if item already in wishlist, just remove it from cart
+      removeItem();
     }
   }
 

@@ -1,23 +1,36 @@
 import { Link } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDBdata } from "../../context/index";
 import { CategoryCard } from "./CategoryCard";
 import { Loader } from "../loader/Loader";
 import { getCategories } from "../../utilities/server-request/server-request";
 import "./home.css";
+import { ErrorPage } from "../error-page/ErrorPage";
 
 export function Home() {
-  const {dataState, dataDispatch } = useDBdata();
+  const { dataState, dataDispatch } = useDBdata();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     if (!dataState.categories.length) {
       (async () => {
-        const categoriesData = await getCategories();
-        dataDispatch({ type: "CATEGORIES", payload: categoriesData.data.categories });
-      })()
+        try {
+          setLoading(true);
+          const categoriesData = await getCategories();
+          setLoading(false);
+          dataDispatch({
+            type: "CATEGORIES",
+            payload: categoriesData.data.categories,
+          });
+        } catch (err) {
+          setLoading(false);
+          setError(true);
+        }
+      })();
     }
-  },[])
- 
+  }, []);
+
   return (
     <main>
       {/* hero image */}
@@ -37,14 +50,14 @@ export function Home() {
       </div>
 
       {/* category list */}
-       
+
       <div className="category-cards my-2">
         {dataState.categories.map((category) => (
           <CategoryCard key={category._id} category={category} />
         ))}
-      </div> 
-      {!dataState.categories.length && <Loader/>}
-
+      </div>
+      {loading && <Loader />}
+      {error && <ErrorPage />}
     </main>
   );
 }

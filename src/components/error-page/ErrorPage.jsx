@@ -1,6 +1,8 @@
-import "./errorPage.css"
 export function ErrorPage(){
     return(
-        <h2 className="heading h2 loadingMessage">Some error occurred please refresh the page</h2>
+        <div className="w-100 my-5 txt-bold h3 txt-center txt-gray">
+            <p>Some error occurred.</p>
+            <p>Try after sometime!</p>
+        </div>
     )
 }

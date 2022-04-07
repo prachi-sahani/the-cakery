@@ -9,10 +9,12 @@ import {
 } from "../../utilities/server-request/server-request";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useMessageHandling } from "../../context/message-handling";
 
 export function ProductCard({ product }) {
   const { dataState, dataDispatch } = useDBdata();
   const { authToken } = useAuth();
+  const { showSnackbar } = useMessageHandling();
   const [actionText, setActionText] = useState("ADD TO CART");
   const navigate = useNavigate();
   const isProductInWishlist =
@@ -29,27 +31,30 @@ export function ProductCard({ product }) {
           dataState.cart?.findIndex((item) => item._id === product._id) >= 0;
         if (isProductInCart) {
           (async () => {
-            const updatedCart = await updateCart(
-              authToken,
-              product._id,
-              "increment"
-            );
-            if (updatedCart) {
+            try {
+              const updatedCart = await updateCart(
+                authToken,
+                product._id,
+                "increment"
+              );
+              showSnackbar(updatedCart.data.message);
               dataDispatch({ type: "CART", payload: updatedCart.data.cart });
               setActionText("GO TO CART");
-            } else {
-              // show error snackbar
+            } catch (err) {
               setActionText("ADD TO CART");
+              showSnackbar("Some error occurred. Try Again!");
             }
           })();
         } else {
           (async () => {
-            const updatedCart = await addToCart(authToken, product);
-            if (updatedCart) {
+            try {
+              const updatedCart = await addToCart(authToken, product);
+              showSnackbar(updatedCart.data.message);
               dataDispatch({ type: "CART", payload: updatedCart.data.cart });
               setActionText("GO TO CART");
-            } else {
-              // show error snackbar
+            } catch (err) {
+              setActionText("ADD TO CART");
+              showSnackbar("Some error occurred. Try Again!");
             }
           })();
         }
@@ -65,22 +70,32 @@ export function ProductCard({ product }) {
   async function updateWishlist() {
     if (authToken) {
       if (isProductInWishlist) {
-        const updatedWishlist = await removeFromWishlist(
-          authToken,
-          product._id
-        );
-        dataDispatch({
-          type: "WISHLIST",
-          payload: updatedWishlist.data.wishlist,
-        });
-        setWishlistIcon("favorite_border");
+        try {
+          const updatedWishlist = await removeFromWishlist(
+            authToken,
+            product._id
+          );
+          showSnackbar(updatedWishlist.data.message);
+          dataDispatch({
+            type: "WISHLIST",
+            payload: updatedWishlist.data.wishlist,
+          });
+          setWishlistIcon("favorite_border");
+        } catch (err) {
+          showSnackbar("Some error occurred. Try Again!");
+        }
       } else {
-        const updatedWishlist = await addToWishlist(authToken, product);
-        dataDispatch({
-          type: "WISHLIST",
-          payload: updatedWishlist.data.wishlist,
-        });
-        setWishlistIcon("favorite");
+        try {
+          const updatedWishlist = await addToWishlist(authToken, product);
+          showSnackbar(updatedWishlist.data.message);
+          dataDispatch({
+            type: "WISHLIST",
+            payload: updatedWishlist.data.wishlist,
+          });
+          setWishlistIcon("favorite");
+        } catch (err) {
+          showSnackbar("Some error occurred. Try Again!");
+        }
       }
     } else {
       localStorage.setItem("lastRoute", "/products");

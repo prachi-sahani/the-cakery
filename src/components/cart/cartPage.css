@@ -1,6 +1,6 @@
 .cart-management {
     min-height: calc(
-      100vh - 21.5rem
+      100vh - 15rem
     ); /* total viewport minus height of header and footer*/
     display: flex;
     flex-direction: row;

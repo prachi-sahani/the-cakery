@@ -10,8 +10,11 @@ import {
   CartPage,
   SignupPage,
 } from "./components/index.jsx";
+import { Snackbar } from "./components/snackbar/Snackbar";
+import { useMessageHandling } from "./context/message-handling";
 
 function App() {
+  const{errorMessage} = useMessageHandling()
 
   return (
     <div className="App">
@@ -24,6 +27,7 @@ function App() {
         <Route path="login" element={<LoginPage />}></Route>
         <Route path="signup" element={<SignupPage />}></Route>
       </Routes>
+      {errorMessage && <Snackbar/>}
       <Footer />
     </div>
   );
