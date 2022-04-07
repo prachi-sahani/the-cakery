@@ -13,37 +13,41 @@ export function CartPage() {
   const { authToken } = useAuth();
   const navigate = useNavigate();
   const [loader, setLoader] = useState(false);
-  const [errorOccurred, setErrorOccurred] = useState(false);
-  const [priceDetails, setPriceDetails] = useState({totalPrice:0, totalDiscount:0, deliveryCharges:50})
+  const [error, setError] = useState(false);
+  const [priceDetails, setPriceDetails] = useState({
+    totalPrice: 0,
+    totalDiscount: 0,
+    deliveryCharges: 50,
+  });
   function calculatePriceDetails(cartItems) {
-    let details = {totalPrice:0, totalDiscount:0, deliveryCharges:50}
+    let details = { totalPrice: 0, totalDiscount: 0, deliveryCharges: 50 };
     cartItems.forEach((productInCart) => {
       details = {
         ...details,
-        totalPrice: details.totalPrice + (productInCart.price*productInCart.qty),
-        totalDiscount: details.totalDiscount + (productInCart.discount*productInCart.qty),
+        totalPrice:
+          details.totalPrice + productInCart.price * productInCart.qty,
+        totalDiscount:
+          details.totalDiscount + productInCart.discount * productInCart.qty,
       };
     });
-    setPriceDetails(details)
+    setPriceDetails(details);
   }
   useEffect(() => {
     if (authToken) {
       if (!dataState.cart) {
         setLoader(true);
         (async () => {
-          const cartItems = await getCartItem(authToken);
-          setLoader(false);
-          if(cartItems){
-            dataDispatch({ type: "CART", payload: cartItems?.data.cart});
+          try {
+            const cartItems = await getCartItem(authToken);
+            setLoader(false);
+            dataDispatch({ type: "CART", payload: cartItems?.data.cart });
             calculatePriceDetails(cartItems.data.cart);
-          }
-          else{
-            // when api fails
-            setErrorOccurred(true); 
+          } catch (err) {
+            setLoader(false);
+            setError(true)
           }
         })();
-      }
-      else{
+      } else {
         calculatePriceDetails(dataState.cart);
       }
     } else {
@@ -55,7 +59,7 @@ export function CartPage() {
 
   return (
     <main className="cart-management">
-      {errorOccurred && <ErrorPage/>}
+      {error && <ErrorPage />}
       {loader && <Loader />}
       {dataState.cart?.length === 0 && <NoItemInCart />}
       {dataState.cart?.length > 0 && (
@@ -65,7 +69,11 @@ export function CartPage() {
           </p>
 
           {dataState.cart.map((item) => (
-            <CartItemCard key={item._id} item={item} calculatePriceDetails={calculatePriceDetails}/>
+            <CartItemCard
+              key={item._id}
+              item={item}
+              calculatePriceDetails={calculatePriceDetails}
+            />
           ))}
         </div>
       )}
@@ -80,26 +88,32 @@ export function CartPage() {
               <div className="price-details">
                 <p className="txt">Price({dataState.cart?.length})</p>
                 <p className="pricing txt txt-left">
-                  <i className="material-icons">currency_rupee</i>{priceDetails.totalPrice}
+                  <i className="material-icons">currency_rupee</i>
+                  {priceDetails.totalPrice}
                 </p>
               </div>
               <div className="price-details">
                 <p className="txt">Discount</p>
                 <p className="pricing txt txt-left">
-                  <i className="material-icons">currency_rupee</i>{priceDetails.totalDiscount}
+                  <i className="material-icons">currency_rupee</i>
+                  {priceDetails.totalDiscount}
                 </p>
               </div>
               <div className="price-details">
                 <p className="txt">Delivery Charges</p>
                 <p className="pricing txt txt-left">
-                  <i className="material-icons">currency_rupee</i>{priceDetails.deliveryCharges}
+                  <i className="material-icons">currency_rupee</i>
+                  {priceDetails.deliveryCharges}
                 </p>
               </div>
               <hr />
               <div className="price-details">
                 <p className="txt txt-bold txt-md">Total Price</p>
                 <p className="pricing txt txt-left">
-                  <i className="material-icons">currency_rupee</i>{priceDetails.totalPrice+priceDetails.totalDiscount+priceDetails.deliveryCharges}
+                  <i className="material-icons">currency_rupee</i>
+                  {priceDetails.totalPrice +
+                    priceDetails.totalDiscount +
+                    priceDetails.deliveryCharges}
                 </p>
               </div>
               <hr className="txt-gray" />

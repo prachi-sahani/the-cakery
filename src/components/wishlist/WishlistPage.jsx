@@ -13,22 +13,23 @@ export function WishlistPage() {
   const { authToken } = useAuth();
   const navigate = useNavigate();
   const [loader, setLoader] = useState(false);
-  const [errorOccurred, setErrorOccurred] = useState(false);
+  const [error, setError] = useState(false);
   useEffect(() => {
     if (authToken) {
       if (!dataState.cart) {
         setLoader(true);
         (async () => {
-          const wishlistItems = await getWishlist(authToken);
-          setLoader(false);
-          if (wishlistItems) {
+          try {
+            const wishlistItems = await getWishlist(authToken);
+            setLoader(false);
             dataDispatch({
               type: "WISHLIST",
               payload: wishlistItems?.data.wishlist,
             });
-          } else {
+          } catch (err) {
             // when api fails
-            setErrorOccurred(true);
+            setLoader(false);
+            setError(true);
           }
         })();
       }
@@ -38,14 +39,14 @@ export function WishlistPage() {
       navigate("/login");
     }
   }, []);
-  
+
   return (
     <main className="wishlist-page">
-      {errorOccurred && <ErrorPage />}
+      {error && <ErrorPage />}
       {loader && <Loader />}
 
       {/* no product page */}
-      {dataState.wishlist?.length===0 && !loader && <NoProductWishlisted />}
+      {dataState.wishlist?.length === 0 && !loader && <NoProductWishlisted />}
 
       {dataState.wishlist?.length > 0 && !loader && (
         <div className="products">

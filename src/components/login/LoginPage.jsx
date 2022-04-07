@@ -4,7 +4,7 @@ import { useAuth } from "../../context/index";
 import "./login-signup.css";
 
 export function LoginPage() {
-  const { loginAsGuest, authToken } = useAuth();
+  const { loginAsGuest, authToken, isLoading } = useAuth();
   const navigate = useNavigate();
   useEffect(() => {
     // if user is already logged in and tries to access login page, they will be redirected to lastRoute or home page
@@ -15,7 +15,7 @@ export function LoginPage() {
           : "/"
       );
     }
-  },[]);
+  }, []);
 
   return (
     <main className="auth-page">
@@ -70,7 +70,7 @@ export function LoginPage() {
             type="button"
             onClick={loginAsGuest}
           >
-            Login As Guest
+            {!isLoading ? "Login As Guest" : "Logging in..."}
           </button>
         </form>
         <div className="card-footer">
