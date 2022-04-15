@@ -6,16 +6,23 @@ import { useAuth } from "../../context";
 export function SignupPage() {
   const { authToken, signupUser, isLoadingSignup } = useAuth();
   const navigate = useNavigate();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [passwordErrorMsg, setPasswordErrorMsg] = useState("");
-  const [confirmPasswordErrorMsg, setConfirmPasswordErrorMsg] = useState("");
-  const [emailErrorMsg, setEmailErrorMsg] = useState("");
-  const [firstNameErrorMsg, setFirstNameErrorMsg] = useState("");
-  const [lastNameErrorMsg, setLastNameErrorMsg] = useState("");
+  const initialFormData = {
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  };
+  const initialFormErrors = {
+    firstNameError: "",
+    lastNameError: "",
+    emailError: "",
+    passwordError: "",
+    confirmPasswordError: "",
+  };
+  const [signupForm, setSignupForm] = useState(initialFormData);
+  const [formErrors, setFormErrors] = useState(initialFormErrors);
+
   useEffect(() => {
     // if user is already logged in and tries to access signup page, they will be redirected to home page
     if (authToken) {
@@ -25,36 +32,46 @@ export function SignupPage() {
   function signupUserClickHandler(e) {
     e.preventDefault();
     const emailRegex = new RegExp(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/);
-    if (!firstName) {
-      setFirstNameErrorMsg("Required field");
+    if (!signupForm.firstName) {
+      setFormErrors((data) => ({ ...data, firstNameError: "Required field" }));
     }
-    if (!lastName) {
-      setLastNameErrorMsg("Required field");
+    if (!signupForm.lastName) {
+      setFormErrors((data) => ({ ...data, lastNameError: "Required field" }));
     }
-    if (!email) {
-      setEmailErrorMsg("Required field");
-    } else if (!emailRegex.test(email)) {
-      setEmailErrorMsg("Invalid email");
+    if (!signupForm.email) {
+      setFormErrors((data) => ({ ...data, emailError: "Required field" }));
+    } else if (!emailRegex.test(signupForm.email)) {
+      setFormErrors((data) => ({ ...data, emailError: "Invalid email" }));
     }
-    if (!password) {
-      setPasswordErrorMsg("Required field");
+    if (!signupForm.password) {
+      setFormErrors((data) => ({ ...data, passwordError: "Required field" }));
     }
-    if (!confirmPassword) {
-      setConfirmPasswordErrorMsg("Required field");
-    }
-    if (password && confirmPassword && password !== confirmPassword) {
-      setConfirmPasswordErrorMsg("Passwords do not match");
+    if (!signupForm.confirmPassword) {
+      setFormErrors((data) => ({
+        ...data,
+        confirmPasswordError: "Required field",
+      }));
     }
     if (
-      firstName &&
-      lastName &&
-      email &&
-      password &&
-      confirmPassword &&
-      password === confirmPassword &&
-      emailRegex.test(email)
+      signupForm.password &&
+      signupForm.confirmPassword &&
+      signupForm.password !== signupForm.confirmPassword
     ) {
-      signupUser({ email, password });
+      setFormErrors((data) => ({
+        ...data,
+        confirmPasswordError: "Passwords do not match",
+      }));
+    }
+    if (
+      signupForm.firstName &&
+      signupForm.lastName &&
+      signupForm.email &&
+      signupForm.password &&
+      signupForm.confirmPassword &&
+      signupForm.password === signupForm.confirmPassword &&
+      emailRegex.test(signupForm.email)
+    ) {
+      signupUser({ email: signupForm.email, password: signupForm.password });
     }
   }
 
@@ -83,12 +100,15 @@ export function SignupPage() {
               placeholder="John"
               id="firstName"
               onChange={(e) => {
-                setFirstNameErrorMsg("");
-                setFirstName(e.target.value);
+                setFormErrors((data) => ({ ...data, firstNameError: "" }));
+                setSignupForm((data) => ({
+                  ...data,
+                  firstName: e.target.value,
+                }));
               }}
               required
             />
-            <small className="msg-error">{firstNameErrorMsg}</small>
+            <small className="msg-error">{formErrors.firstNameError}</small>
           </div>
           <div className="input-group auth-input-group">
             <label className="input-label py-1" htmlFor="lastName">
@@ -102,12 +122,15 @@ export function SignupPage() {
               placeholder="Doe"
               id="lastName"
               onChange={(e) => {
-                setLastNameErrorMsg("");
-                setLastName(e.target.value);
+                setFormErrors((data) => ({ ...data, lastNameError: "" }));
+                setSignupForm((data) => ({
+                  ...data,
+                  lastName: e.target.value,
+                }));
               }}
               required
             />
-            <small className="msg-error">{lastNameErrorMsg}</small>
+            <small className="msg-error">{formErrors.lastNameError}</small>
           </div>
           <div className="input-group auth-input-group">
             <label className="input-label py-1" htmlFor="emailID">
@@ -121,12 +144,15 @@ export function SignupPage() {
               placeholder="delicious_desserts@email.com"
               id="emailID"
               onChange={(e) => {
-                setEmailErrorMsg("");
-                setEmail(e.target.value);
+                setFormErrors((data) => ({ ...data, emailError: "" }));
+                setSignupForm((data) => ({
+                  ...data,
+                  email: e.target.value,
+                }));
               }}
               required
             />
-            <small className="msg-error">{emailErrorMsg}</small>
+            <small className="msg-error">{formErrors.emailError}</small>
           </div>
           <div className="input-group auth-input-group">
             <label className="input-label py-1" htmlFor="password">
@@ -139,12 +165,15 @@ export function SignupPage() {
               placeholder="*******"
               id="password"
               onChange={(e) => {
-                setPasswordErrorMsg("");
-                setPassword(e.target.value);
+                setFormErrors((data) => ({ ...data, passwordError: "" }));
+                setSignupForm((data) => ({
+                  ...data,
+                  password: e.target.value,
+                }));
               }}
               required
             />
-            <small className="msg-error">{passwordErrorMsg}</small>
+            <small className="msg-error">{formErrors.passwordError}</small>
           </div>
           <div className="input-group auth-input-group">
             <label className="input-label py-1" htmlFor="confirm-password">
@@ -157,12 +186,20 @@ export function SignupPage() {
               placeholder="*******"
               id="confirm-password"
               onChange={(e) => {
-                setConfirmPasswordErrorMsg("");
-                setConfirmPassword(e.target.value);
+                setFormErrors((data) => ({
+                  ...data,
+                  confirmPasswordError: "",
+                }));
+                setSignupForm((data) => ({
+                  ...data,
+                  confirmPassword: e.target.value,
+                }));
               }}
               required
             />
-            <small className="msg-error">{confirmPasswordErrorMsg}</small>
+            <small className="msg-error">
+              {formErrors.confirmPasswordError}
+            </small>
           </div>
           {/* <p className="txt checkbox-input-group auth-checkbox">
             <input type="checkbox" name="tnc" value="tnc" />
@@ -184,8 +221,11 @@ export function SignupPage() {
             </Link>
           </div>
           <div className="action-icons">
-            ALREADY REGISTERED?{" "}
-            <Link to="/login" className="btn-link btn-link-primary txt-bold">
+            ALREADY REGISTERED?
+            <Link
+              to="/login"
+              className="btn-link btn-link-primary txt-bold pl-1"
+            >
               LOGIN
             </Link>
           </div>

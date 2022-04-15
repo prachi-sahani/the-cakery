@@ -11,10 +11,17 @@ export function LoginPage() {
     loginUser,
     isLoadingLoginUser,
   } = useAuth();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [passwordErrorMsg, setPasswordErrorMsg] = useState("");
-  const [emailErrorMsg, setEmailErrorMsg] = useState("");
+  const initialFormData = {
+    lastName: "",
+    email: "",
+  };
+  const initialFormErrors = {
+    emailError: "",
+    passwordError: "",
+  };
+  const [loginForm, setLoginForm] = useState(initialFormData);
+  const [formErrors, setFormErrors] = useState(initialFormErrors);
+
   const navigate = useNavigate();
   useEffect(() => {
     // if user is already logged in and tries to access login page, they will be redirected to previous page
@@ -26,16 +33,20 @@ export function LoginPage() {
   function loginUserClickHandler(e) {
     e.preventDefault();
     const emailRegex = new RegExp(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/);
-    if (!email) {
-      setEmailErrorMsg("Required field");
-    } else if (!emailRegex.test(email)) {
-      setEmailErrorMsg("Invalid email");
+    if (!loginForm.email) {
+      setFormErrors((data) => ({ ...data, emailError: "Required field" }));
+    } else if (!emailRegex.test(loginForm.email)) {
+      setFormErrors((data) => ({ ...data, emailError: "Invalid email" }));
     }
-    if (!password) {
-      setPasswordErrorMsg("Required field");
+    if (!loginForm.password) {
+      setFormErrors((data) => ({ ...data, passwordError: "Required field" }));
     }
-    if (email && password && emailRegex.test(email)) {
-      loginUser(email, password);
+    if (
+      loginForm.email &&
+      loginForm.password &&
+      emailRegex.test(loginForm.email)
+    ) {
+      loginUser(loginForm.email, loginForm.password);
     }
   }
 
@@ -64,12 +75,15 @@ export function LoginPage() {
               placeholder="delicious_desserts@email.com"
               id="emailID"
               onChange={(e) => {
-                setEmailErrorMsg("");
-                setEmail(e.target.value);
+                setFormErrors((data) => ({ ...data, emailError: "" }));
+                setLoginForm((data) => ({
+                  ...data,
+                  email: e.target.value,
+                }));
               }}
               required
             />
-            <small className="msg-error">{emailErrorMsg}</small>
+            <small className="msg-error">{formErrors.emailError}</small>
           </div>
           <div className="input-group auth-input-group">
             <label className="input-label py-1" htmlFor="password">
@@ -82,12 +96,15 @@ export function LoginPage() {
               placeholder="*******"
               id="password"
               onChange={(e) => {
-                setPasswordErrorMsg("");
-                setPassword(e.target.value);
+                setFormErrors((data) => ({ ...data, passwordError: "" }));
+                setLoginForm((data) => ({
+                  ...data,
+                  password: e.target.value,
+                }));
               }}
               required
             />
-            <small className="msg-error">{passwordErrorMsg}</small>
+            <small className="msg-error">{formErrors.passwordError}</small>
           </div>
 
           <button
