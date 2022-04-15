@@ -8,7 +8,7 @@ import {
   updateCart,
 } from "../../utilities/server-request/server-request";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useMessageHandling } from "../../context/message-handling";
 
 export function ProductCard({ product }) {
@@ -17,6 +17,7 @@ export function ProductCard({ product }) {
   const { showSnackbar } = useMessageHandling();
   const [actionText, setActionText] = useState("ADD TO CART");
   const navigate = useNavigate();
+  const location = useLocation();
   const isProductInWishlist =
     dataState.wishlist?.findIndex((item) => item._id === product._id) >= 0;
   const [wishlistIcon, setWishlistIcon] = useState(
@@ -62,8 +63,7 @@ export function ProductCard({ product }) {
         navigate("/cart");
       }
     } else {
-      localStorage.setItem("lastRoute", "/products");
-      navigate("/login");
+      navigate("/login", {state:{from: location}, replace:true});
     }
   }
 
@@ -98,8 +98,7 @@ export function ProductCard({ product }) {
         }
       }
     } else {
-      localStorage.setItem("lastRoute", "/products");
-      navigate("/login");
+      navigate("/login", {state:{from: location}, replace:true});
     }
   }
 

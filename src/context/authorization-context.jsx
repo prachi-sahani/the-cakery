@@ -1,7 +1,6 @@
-import axios from "axios";
 import { createContext } from "react";
 import { useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { login } from "../utilities/server-request/server-request";
 import { useMessageHandling } from "./message-handling";
 
@@ -11,6 +10,7 @@ function AuthProvider({ children }) {
   const [authToken, setAuthToken] = useState(
     sessionStorage.getItem("token") || ""
   );
+  const location = useLocation();
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const { showSnackbar } = useMessageHandling();
@@ -24,11 +24,10 @@ function AuthProvider({ children }) {
       };
       const token = await login(data);
       setIsLoading(false);
-      const lastRoute = localStorage.getItem("lastRoute");
       setAuthToken(token.data.encodedToken);
       sessionStorage.setItem("token", token.data.encodedToken);
-      localStorage.setItem("lastRoute", "/");
-      navigate(lastRoute ? lastRoute : "/");
+      const lastRoute = location?.state?.from?.pathname || "/";
+      navigate(lastRoute);
     } catch (err) {
       setIsLoading(false);
       showSnackbar(

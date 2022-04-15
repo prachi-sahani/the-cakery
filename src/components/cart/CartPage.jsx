@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useAuth, useDBdata } from "../../context/index";
 import { getCartItem } from "../../utilities/server-request/server-request";
@@ -11,7 +11,6 @@ import "./cartPage.css";
 export function CartPage() {
   const { dataState, dataDispatch } = useDBdata();
   const { authToken } = useAuth();
-  const navigate = useNavigate();
   const [loader, setLoader] = useState(false);
   const [error, setError] = useState(false);
   const [priceDetails, setPriceDetails] = useState({
@@ -33,27 +32,21 @@ export function CartPage() {
     setPriceDetails(details);
   }
   useEffect(() => {
-    if (authToken) {
-      if (!dataState.cart) {
-        setLoader(true);
-        (async () => {
-          try {
-            const cartItems = await getCartItem(authToken);
-            setLoader(false);
-            dataDispatch({ type: "CART", payload: cartItems?.data.cart });
-            calculatePriceDetails(cartItems.data.cart);
-          } catch (err) {
-            setLoader(false);
-            setError(true)
-          }
-        })();
-      } else {
-        calculatePriceDetails(dataState.cart);
-      }
+    if (!dataState.cart) {
+      setLoader(true);
+      (async () => {
+        try {
+          const cartItems = await getCartItem(authToken);
+          setLoader(false);
+          dataDispatch({ type: "CART", payload: cartItems?.data.cart });
+          calculatePriceDetails(cartItems.data.cart);
+        } catch (err) {
+          setLoader(false);
+          setError(true);
+        }
+      })();
     } else {
-      // when user is not logged in
-      localStorage.setItem("lastRoute", "/cart"); //for to redirect to same page after user login
-      navigate("/login");
+      calculatePriceDetails(dataState.cart);
     }
   }, []);
 

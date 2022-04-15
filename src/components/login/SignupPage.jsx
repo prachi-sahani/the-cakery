@@ -8,13 +8,9 @@ export function SignupPage(){
     const navigate = useNavigate();
     
     useEffect(() => {
-        // if user is already logged in and tries to access signup page, they will be redirected to lastRoute or home page
+        // if user is already logged in and tries to access signup page, they will be redirected to home page
         if (authToken) {
-          navigate(
-            localStorage.getItem("lastRoute")
-              ? localStorage.getItem("lastRoute")
-              : "/"
-          );
+          navigate(-1);
         }
       },[])
       ;

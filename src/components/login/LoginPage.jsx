@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useAuth } from "../../context/index";
 import "./login-signup.css";
@@ -7,13 +7,9 @@ export function LoginPage() {
   const { loginAsGuest, authToken, isLoading } = useAuth();
   const navigate = useNavigate();
   useEffect(() => {
-    // if user is already logged in and tries to access login page, they will be redirected to lastRoute or home page
+    // if user is already logged in and tries to access login page, they will be redirected to home page
     if (authToken) {
-      navigate(
-        localStorage.getItem("lastRoute")
-          ? localStorage.getItem("lastRoute")
-          : "/"
-      );
+      navigate(-1);
     }
   }, []);
 
