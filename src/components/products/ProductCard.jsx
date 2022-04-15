@@ -26,7 +26,7 @@ export function ProductCard({ product }) {
   function cartAction() {
     // if user is logged in then only add items to cart
     if (authToken) {
-      setActionText("LOADING...");
+      setActionText("ADDING...");
       if (actionText === "ADD TO CART") {
         const isProductInCart =
           dataState.cart?.findIndex((item) => item._id === product._id) >= 0;
@@ -150,7 +150,7 @@ export function ProductCard({ product }) {
         <div className="action-button">
           <button
             className="btn-basic btn-primary"
-            disabled={actionText === "LOADING..."}
+            disabled={actionText === "ADDING..."}
             onClick={cartAction}
           >
             {actionText}
