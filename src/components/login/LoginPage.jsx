@@ -50,6 +50,14 @@ export function LoginPage() {
     }
   }
 
+  function inputChangeHandler(e, type) {
+    setFormErrors((data) => ({ ...data, [`${type}Error`]: "" }));
+    setLoginForm((data) => ({
+      ...data,
+      [type]: e.target.value,
+    }));
+  }
+
   return (
     <main className="auth-page">
       <div className="card card-basic auth-card">
@@ -74,13 +82,7 @@ export function LoginPage() {
               name="emailID"
               placeholder="delicious_desserts@email.com"
               id="emailID"
-              onChange={(e) => {
-                setFormErrors((data) => ({ ...data, emailError: "" }));
-                setLoginForm((data) => ({
-                  ...data,
-                  email: e.target.value,
-                }));
-              }}
+              onChange={(e) => inputChangeHandler(e, "email")}
               required
             />
             <small className="msg-error">{formErrors.emailError}</small>
@@ -95,13 +97,7 @@ export function LoginPage() {
               name="password"
               placeholder="*******"
               id="password"
-              onChange={(e) => {
-                setFormErrors((data) => ({ ...data, passwordError: "" }));
-                setLoginForm((data) => ({
-                  ...data,
-                  password: e.target.value,
-                }));
-              }}
+              onChange={(e) => inputChangeHandler(e, "password")}
               required
             />
             <small className="msg-error">{formErrors.passwordError}</small>
