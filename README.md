@@ -31,7 +31,7 @@
  - **[Wishlist](https://the-cakery-react.vercel.app/wishlist)** - list of products added to wishlist by the user(requires user to be logged in). User can:
    -  remove item from wishlist
    -  add item to cart
- - **[Authentication](https://the-cakery-react.vercel.app/login)** - As of now user can login as guest only and logout. Feature signup and login using own credentials will be added in near future.
+ - **[Authentication](https://the-cakery-react.vercel.app/login)** - User can signup, login as guest, login and logout.
 
 **Demo video**:
 ![ezgif com-gif-maker (6)](https://user-images.githubusercontent.com/64582473/162243167-4aa66491-9dcd-4937-b949-2e6ff6926341.gif)
