@@ -16,7 +16,7 @@ export function WishlistItemCard({ product }) {
   const navigate = useNavigate();
   const { showSnackbar } = useMessageHandling();
   function cartAction() {
-    setActionText("LOADING...");
+    setActionText("ADDING...");
     if (actionText === "ADD TO CART") {
       const isProductInCart =
         dataState.cart?.findIndex((item) => item._id === product._id) >= 0;

@@ -20,5 +20,5 @@
 /* visible for screens below 600px */
 .navbar-menu-list .list-item{
   padding: 0.75rem 1rem;
-  width: max-content;
+  min-width: max-content;
 }

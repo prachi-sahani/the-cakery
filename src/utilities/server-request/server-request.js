@@ -12,6 +12,10 @@ function login(data) {
   return axios.post("/api/auth/login", data);
 }
 
+function signup(data) {
+  return axios.post("/api/auth/signup", data);
+}
+
 function getCartItem(token) {
   return axios.get("/api/user/cart", {
     headers: { authorization: token },
@@ -85,4 +89,5 @@ export {
   addToWishlist,
   removeFromWishlist,
   login,
+  signup
 };
