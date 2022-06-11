@@ -14,16 +14,26 @@ export function Navbar() {
         <Link className="link" to="/">
           <img
             className="navbar-brand logo"
-            src="assets/logo.png"
+            src="/assets/logo.png"
             alt="Cakery"
           ></img>
         </Link>
         <div className="navbar-nav">
           <ul className="list-group-inline navbar-nav-list">
-            <NavLink className={({isActive}) => isActive? "txt-bold link" : "link"} to="/">
+            <NavLink
+              className={({ isActive }) =>
+                isActive ? "txt-bold link" : "link"
+              }
+              to="/"
+            >
               <li className="txt-primary list-item">Home</li>
             </NavLink>
-            <NavLink className={({isActive}) => isActive? "txt-bold link" : "link"} to="/products">
+            <NavLink
+              className={({ isActive }) =>
+                isActive ? "txt-bold link" : "link"
+              }
+              to="/products"
+            >
               <li className="txt-primary list-item">Order Now</li>
             </NavLink>
           </ul>
@@ -68,12 +78,13 @@ export function Navbar() {
                 shopping_cart
               </Link>
             )}
-            <Link
+            {/* will include user profile later */}
+            {/* <Link
               to="/"
               className="btn-link btn-icon btn-outline-primary material-icons link"
             >
               account_circle
-            </Link>
+            </Link> */}
             {authToken ? (
               <button
                 onClick={logout}
@@ -106,14 +117,18 @@ export function Navbar() {
                 to="/cart"
                 onClick={() => setShowMenu(false)}
               >
-                <li className="txt-primary list-w-icon list-item"><i className="material-icons">shopping_cart</i>Shopping Bag</li>
+                <li className="txt-primary list-w-icon list-item">
+                  <i className="material-icons">shopping_cart</i>Shopping Bag
+                </li>
               </Link>
               <Link
                 className="link"
                 to="/wishlist"
                 onClick={() => setShowMenu(false)}
               >
-                <li className="txt-primary list-w-icon list-item"><i className="material-icons">favorite</i>Wishlist</li>
+                <li className="txt-primary list-w-icon list-item">
+                  <i className="material-icons">favorite</i>Wishlist
+                </li>
               </Link>
               {authToken ? (
                 <Link
@@ -124,7 +139,9 @@ export function Navbar() {
                     logout();
                   }}
                 >
-                  <li className="txt-primary list-w-icon list-item"><i className="material-icons">logout</i>Logout</li>
+                  <li className="txt-primary list-w-icon list-item">
+                    <i className="material-icons">logout</i>Logout
+                  </li>
                 </Link>
               ) : (
                 <Link
@@ -132,7 +149,9 @@ export function Navbar() {
                   to="/login"
                   onClick={() => setShowMenu(false)}
                 >
-                  <li className="txt-primary list-w-icon list-item"><i className="material-icons">login</i>Signup/Login </li>
+                  <li className="txt-primary list-w-icon list-item">
+                    <i className="material-icons">login</i>Signup/Login{" "}
+                  </li>
                 </Link>
               )}
             </ul>

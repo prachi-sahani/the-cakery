@@ -104,7 +104,7 @@ export function CartPage() {
                 <p className="txt txt-bold txt-md">Total Price</p>
                 <p className="pricing txt txt-left">
                   <i className="material-icons">currency_rupee</i>
-                  {priceDetails.totalPrice +
+                  {priceDetails.totalPrice -
                     priceDetails.totalDiscount +
                     priceDetails.deliveryCharges}
                 </p>

@@ -8,7 +8,7 @@ import {
   updateCart,
 } from "../../utilities/server-request/server-request";
 import { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useMessageHandling } from "../../context/message-handling";
 import { ShareProduct } from "../share-product/ShareProduct";
 
@@ -25,7 +25,9 @@ export function ProductCard({ product }) {
   const [wishlistIcon, setWishlistIcon] = useState(
     isProductInWishlist && authToken ? "favorite" : "favorite_border"
   );
-  function cartAction() {
+  function cartAction(event) {
+    event.preventDefault();
+
     // if user is logged in then only add items to cart
     if (authToken) {
       setActionText("ADDING...");
@@ -69,7 +71,8 @@ export function ProductCard({ product }) {
     }
   }
 
-  async function updateWishlist() {
+  async function updateWishlist(event) {
+    event.preventDefault();
     if (authToken) {
       if (isProductInWishlist) {
         try {
@@ -108,7 +111,10 @@ export function ProductCard({ product }) {
     setOpenShare(false);
   }
   return (
-    <div className="product-card card card-w-badge">
+    <Link
+      to={`/products/${product.id}`}
+      className="product-card card card-w-badge"
+    >
       <div className="card-image">
         <img alt="" className="card-img product-image" src={product.image} />
         {product.tag && (
@@ -164,7 +170,10 @@ export function ProductCard({ product }) {
           <button
             title="Share"
             className="btn-icon btn-sm material-icons"
-            onClick={() => setOpenShare(true)}
+            onClick={(event) => {
+              event.preventDefault();
+              setOpenShare(true);
+            }}
           >
             share
           </button>
@@ -179,6 +188,6 @@ export function ProductCard({ product }) {
           )}
         </div>
       </div>
-    </div>
+    </Link>
   );
 }

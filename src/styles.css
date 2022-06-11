@@ -185,7 +185,6 @@ nav {
 }
 
 .product-discount {
-  /* border: thin solid var(--primary-700); */
   color: var(--primary-700);
   font-size: small;
   padding: 0.25rem 0.5rem;
@@ -218,6 +217,10 @@ nav {
 .product-share-icons img {
   height: 2.5rem;
   width: 2.5rem;
+}
+
+img {
+  image-rendering: crisp-edges;
 }
 
 @media screen and (max-width: 600px) {
