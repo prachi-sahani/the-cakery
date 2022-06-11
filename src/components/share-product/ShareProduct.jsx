@@ -5,28 +5,28 @@ export function ShareProduct({ close, productLink }) {
   const shareIcons = [
     {
       title: "Whatsapp",
-      icon: "assets/whatsapp.png",
+      icon: "/assets/whatsapp.png",
       url: `https://wa.me?text=I'm in love with this delicious desert from Cakery - ${productLink}`,
     },
     {
       title: "Twitter",
-      icon: "assets/twitter.png",
+      icon: "/assets/twitter.png",
       url: `https://twitter.com/intent/tweet?url=${productLink}&text=Check this out!`,
     },
     {
       title: "Email",
-      icon: "assets/email.png",
+      icon: "/assets/email.png",
       url: `mailto:?subject=Check this out!&body=I'm in love with this new desert from Cakery - ${productLink}`,
     },
     {
       title: "Facebook",
-      icon: "assets/facebook.png",
+      icon: "/assets/facebook.png",
       url: `https://www.facebook.com/sharer/sharer.php?u=${productLink}`,
     },
   ];
   const { showSnackbar } = useMessageHandling();
-
-  function copyLinkToClipboard() {
+  function copyLinkToClipboard(event) {
+    event.preventDefault();
     navigator.clipboard.writeText(productLink);
     showSnackbar("Copied to clipboard!");
   }
@@ -56,8 +56,11 @@ export function ShareProduct({ close, productLink }) {
         </div>
         <div className="product-share-icons">
           {shareIcons.map((item) => (
-            <a
-              href={item.url}
+            <div
+              onClick={(event) => {
+                event.preventDefault();
+                window.open(item.url);
+              }}
               target="_blank"
               rel="noopener noreferrer"
               data-action="share/whatsapp/share"
@@ -67,10 +70,10 @@ export function ShareProduct({ close, productLink }) {
             >
               <img src={item.icon} alt={`Share on ${item.title}`} />
               <p className=" txt-sm txt txt-gray">{item.title}</p>
-            </a>
+            </div>
           ))}
           <div className="txt-center" onClick={copyLinkToClipboard}>
-            <img src="assets/link.png" alt="Copy link" />
+            <img src="/assets/link.png" alt="Copy link" />
             <p className=" txt-sm txt txt-gray">Copy link</p>
           </div>
         </div>

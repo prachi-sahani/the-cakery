@@ -107,9 +107,11 @@ export function ProductCard({ product }) {
     }
   }
 
-  function closeShareDialog() {
+  function closeShareDialog(event) {
+    event.preventDefault();
     setOpenShare(false);
   }
+
   return (
     <Link
       to={`/products/${product.id}`}
