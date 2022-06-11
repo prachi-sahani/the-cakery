@@ -43,7 +43,7 @@ nav {
   box-shadow: 1px 1px 2px 1px var(--black-050);
 }
 
-.w-100{
+.w-100 {
   width: 100%;
 }
 
@@ -56,8 +56,7 @@ nav {
   display: none;
 }
 
-
-.badge-count{
+.badge-count {
   background-color: var(--black-500);
   bottom: 55%;
   left: 60%;
@@ -108,9 +107,7 @@ nav {
   flex-wrap: wrap;
 }
 
-
 .product-card:hover {
-  transform: scale(1.01);
   cursor: pointer;
 }
 
@@ -196,6 +193,31 @@ nav {
 
 .product-discount i {
   font-size: small;
+}
+
+.share-dialog-header {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.product-url-copy {
+  display: flex;
+  align-items: center;
+}
+
+.product-share-icons {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.5rem;
+  justify-content: center;
+}
+
+.product-share-icons img {
+  height: 2.5rem;
+  width: 2.5rem;
 }
 
 @media screen and (max-width: 600px) {
