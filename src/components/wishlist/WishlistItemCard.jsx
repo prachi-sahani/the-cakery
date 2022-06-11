@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useAuth, useDBdata } from "../../context/index";
 import {
@@ -15,7 +15,8 @@ export function WishlistItemCard({ product }) {
   const [actionText, setActionText] = useState("ADD TO CART");
   const navigate = useNavigate();
   const { showSnackbar } = useMessageHandling();
-  function cartAction() {
+  function cartAction(event) {
+    event.preventDefault();
     setActionText("ADDING...");
     if (actionText === "ADD TO CART") {
       const isProductInCart =
@@ -53,7 +54,8 @@ export function WishlistItemCard({ product }) {
       navigate("/cart");
     }
   }
-  async function removeItem() {
+  async function removeItem(event) {
+    event.preventDefault();
     try {
       const updatedWishlist = await removeFromWishlist(authToken, product._id);
       showSnackbar(updatedWishlist.data.message);
@@ -66,7 +68,10 @@ export function WishlistItemCard({ product }) {
     }
   }
   return (
-    <div className="product-card card card-w-badge card-dismiss">
+    <Link
+      to={`/products/${product.id}`}
+      className="product-card card card-w-badge card-dismiss"
+    >
       <div
         className="btn-close material-icons btn-fab btn-sm btn-basic"
         onClick={removeItem}
@@ -115,6 +120,6 @@ export function WishlistItemCard({ product }) {
           </button>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }

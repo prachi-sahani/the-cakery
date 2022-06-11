@@ -8,6 +8,10 @@ function getProducts() {
   return axios.get("/api/products");
 }
 
+function getProductById(productId) {
+  return axios.get(`/api/products/${productId}`);
+}
+
 function login(data) {
   return axios.post("/api/auth/login", data);
 }
@@ -81,6 +85,7 @@ function removeFromWishlist(token, productId) {
 export {
   getCategories,
   getProducts,
+  getProductById,
   getWishlist,
   getCartItem,
   addToCart,
@@ -89,5 +94,5 @@ export {
   addToWishlist,
   removeFromWishlist,
   login,
-  signup
+  signup,
 };
