@@ -9,6 +9,7 @@ import {
   WishlistPage,
   CartPage,
   SignupPage,
+  SingleProductPage,
 } from "./components/index.jsx";
 import { RequireAuth } from "./components/require-auth/RequireAuth";
 import { Snackbar } from "./components/snackbar/Snackbar";
@@ -22,6 +23,10 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />}></Route>
         <Route path="products" element={<Products />}></Route>
+        <Route
+          path="products/:productId"
+          element={<SingleProductPage />}
+        ></Route>
         <Route
           path="wishlist"
           element={
