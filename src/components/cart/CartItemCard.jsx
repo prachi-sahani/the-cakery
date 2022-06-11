@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth, useDBdata } from "../../context/index";
 import { useMessageHandling } from "../../context/message-handling";
 import {
@@ -8,6 +9,7 @@ import {
 } from "../../utilities/server-request/server-request";
 
 export function CartItemCard({ item, calculatePriceDetails }) {
+  const navigate = useNavigate();
   const { authToken } = useAuth();
   const { dataState, dataDispatch } = useDBdata();
   const [wishlistText, setWishlistText] = useState("MOVE TO WISHLIST");
@@ -65,10 +67,17 @@ export function CartItemCard({ item, calculatePriceDetails }) {
 
   return (
     <div className="card card-hz">
-      <img alt={item.title} className="card-img" src={item.image} />
+      <img
+        alt={item.title}
+        className="card-img"
+        src={item.image}
+        onClick={() => navigate(`/products/${item.id}`)}
+      />
       <div className="card-container">
         <div className="card-header">
-          <div className="card-title">{item.title}</div>
+          <Link to={`/products/${item.id}`} className="card-title">
+            {item.title}
+          </Link>
           <div className="card-subtitle"></div>
         </div>
         <div className="card-content">
