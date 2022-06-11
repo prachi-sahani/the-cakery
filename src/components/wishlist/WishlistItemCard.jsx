@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useAuth, useDBdata } from "../../context/index";
 import {
@@ -8,12 +8,15 @@ import {
 } from "../../utilities/server-request/server-request";
 import "./wishlistPage.css";
 import { useMessageHandling } from "../../context/message-handling";
+import { ShareProduct } from "../share-product/ShareProduct";
 
 export function WishlistItemCard({ product }) {
   const { authToken } = useAuth();
   const { dataState, dataDispatch } = useDBdata();
+  const [openShare, setOpenShare] = useState(false);
   const [actionText, setActionText] = useState("ADD TO CART");
   const navigate = useNavigate();
+  const location = useLocation();
   const { showSnackbar } = useMessageHandling();
   function cartAction(event) {
     event.preventDefault();
@@ -67,6 +70,12 @@ export function WishlistItemCard({ product }) {
       showSnackbar("Some error occurred. Try Again!");
     }
   }
+
+  function closeShareDialog(event) {
+    event.preventDefault();
+    setOpenShare(false);
+  }
+
   return (
     <Link
       to={`/products/${product.id}`}
@@ -118,6 +127,27 @@ export function WishlistItemCard({ product }) {
           <button className="btn-basic btn-primary" onClick={cartAction}>
             {actionText}
           </button>
+        </div>
+        <div className="action-icons">
+          <button
+            title="Share"
+            className="btn-icon btn-sm material-icons"
+            onClick={(event) => {
+              event.preventDefault();
+              setOpenShare(true);
+            }}
+          >
+            share
+          </button>
+          {openShare && (
+            <ShareProduct
+              close={closeShareDialog}
+              productLink={window.location.href.replace(
+                location.pathname,
+                `/products/${product.id}`
+              )}
+            />
+          )}
         </div>
       </div>
     </Link>
