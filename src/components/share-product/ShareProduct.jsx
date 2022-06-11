@@ -32,7 +32,7 @@ export function ShareProduct({ close, productLink }) {
   }
 
   return (
-    <div className="dialog-window">
+    <div className="dialog-window" onClick={(event) => event.preventDefault()}>
       <div className="dialog-box share-dialog">
         <div className="dialog-header share-dialog-header">
           <h3 className="heading h3">Share</h3>

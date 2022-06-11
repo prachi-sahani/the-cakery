@@ -71,8 +71,7 @@ export function WishlistItemCard({ product }) {
     }
   }
 
-  function closeShareDialog(event) {
-    event.preventDefault();
+  function closeShareDialog() {
     setOpenShare(false);
   }
 

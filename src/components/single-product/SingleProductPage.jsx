@@ -148,8 +148,7 @@ export function SingleProductPage() {
       navigate("/login", { state: { from: location }, replace: true });
     }
   }
-  function closeShareDialog(event) {
-    event.preventDefault();
+  function closeShareDialog() {
     setOpenShare(false);
   }
 
