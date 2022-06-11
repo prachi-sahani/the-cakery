@@ -52,7 +52,6 @@ export function SingleProductPage() {
             setNoProduct(true);
           }
         } catch (err) {
-          console.log(err);
           setError(true);
         } finally {
           setLoading(false);
