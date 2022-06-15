@@ -10,48 +10,48 @@ export const categories = [
     _id: uuid(),
     categoryName: "Cake",
     categoryIdentity:"CAKES",
-    image:"assets/category-cake.jpg",
+    image:"assets/category-cake.webp",
   },
   {
     _id: uuid(),
     categoryName: "Pastries and Cupcakes",
     categoryIdentity:"PASTRIES",
-    image:"assets/category-cupcakes.jpg"
+    image:"assets/category-cupcakes.webp"
   },
   {
     _id: uuid(),
     categoryName: "Brownies and Dry Cakes",
     categoryIdentity:"BROWNIES",
-    image: "assets/category-brownies.jpg"
+    image: "assets/category-brownies.webp"
   },
   {
     _id: uuid(),
     categoryName: "Jar Desserts",
     categoryIdentity:"JAR DESERTS",
-    image:"assets/category-jar-cake.jpg",
+    image:"assets/category-jar-cake.webp",
   },
   {
     _id: uuid(),
     categoryName: "Chocolates",
     categoryIdentity:"CHOCOLATES",
-    image:"assets/category-chocolates.jpg"
+    image:"assets/category-chocolates.webp"
   },
   {
     _id: uuid(),
     categoryName: "Cookies",
     categoryIdentity:"COOKIES",
-    image: "assets/category-cookies.jpg"
+    image: "assets/category-cookies.webp"
   },
   {
     _id: uuid(),
     categoryName: "Donuts",
     categoryIdentity:"DONUTS",
-    image:"assets/category-donuts.jpg"
+    image:"assets/category-donuts.webp"
   },
   {
     _id: uuid(),
     categoryName: "Gift Hampers",
     categoryIdentity:"GIFT HAMPER",
-    image: "assets/category-gift-hampers.jpg"
+    image: "assets/category-gift-hampers.webp"
   },
 ];
