@@ -108,7 +108,6 @@ nav {
 }
 
 .product-card:hover {
-  transform: scale(1.01);
   cursor: pointer;
 }
 
@@ -186,7 +185,6 @@ nav {
 }
 
 .product-discount {
-  /* border: thin solid var(--primary-700); */
   color: var(--primary-700);
   font-size: small;
   padding: 0.25rem 0.5rem;
@@ -194,6 +192,32 @@ nav {
 
 .product-discount i {
   font-size: small;
+}
+
+.share-dialog-header {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.product-url-copy {
+  display: flex;
+  align-items: center;
+}
+
+.product-share-icons {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.5rem;
+  justify-content: center;
+}
+
+.product-share-icons img {
+  height: 2.5rem;
+  width: 2.5rem;
+  cursor: pointer;
 }
 
 img {

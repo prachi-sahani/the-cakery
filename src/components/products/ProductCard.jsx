@@ -10,12 +10,14 @@ import {
 import { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useMessageHandling } from "../../context/message-handling";
+import { ShareProduct } from "../share-product/ShareProduct";
 
 export function ProductCard({ product }) {
   const { dataState, dataDispatch } = useDBdata();
   const { authToken } = useAuth();
   const { showSnackbar } = useMessageHandling();
   const [actionText, setActionText] = useState("ADD TO CART");
+  const [openShare, setOpenShare] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
   const isProductInWishlist =
@@ -105,6 +107,10 @@ export function ProductCard({ product }) {
     }
   }
 
+  function closeShareDialog() {
+    setOpenShare(false);
+  }
+
   return (
     <Link
       to={`/products/${product.id}`}
@@ -115,7 +121,6 @@ export function ProductCard({ product }) {
         {product.tag && (
           <div className="badge badge-bestseller">{product.tag}</div>
         )}
-
         <div className="product-rating">
           {product.rating}
           <i className="material-icons">star_rate</i>
@@ -161,6 +166,27 @@ export function ProductCard({ product }) {
           >
             {actionText}
           </button>
+        </div>
+        <div className="action-icons">
+          <button
+            title="Share"
+            className="btn-icon btn-sm material-icons"
+            onClick={(event) => {
+              event.preventDefault();
+              setOpenShare(true);
+            }}
+          >
+            share
+          </button>
+          {openShare && (
+            <ShareProduct
+              close={closeShareDialog}
+              productLink={window.location.href.replace(
+                location.pathname,
+                `/products/${product.id}`
+              )}
+            />
+          )}
         </div>
       </div>
     </Link>

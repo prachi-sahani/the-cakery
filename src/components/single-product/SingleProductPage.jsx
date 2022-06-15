@@ -13,6 +13,7 @@ import { Loader } from "../loader/Loader";
 import { ErrorPage } from "../error-page/ErrorPage";
 import { useAuth, useDBdata } from "../../context";
 import { useMessageHandling } from "../../context/message-handling";
+import { ShareProduct } from "../share-product/ShareProduct";
 
 export function SingleProductPage() {
   const { productId } = useParams();
@@ -22,6 +23,7 @@ export function SingleProductPage() {
   const [loading, setLoading] = useState(false);
   const [noProduct, setNoProduct] = useState(false);
   const [product, setProduct] = useState(false);
+  const [openShare, setOpenShare] = useState(false);
   const { dataState, dataDispatch } = useDBdata();
   const { authToken } = useAuth();
   const { showSnackbar } = useMessageHandling();
@@ -146,6 +148,10 @@ export function SingleProductPage() {
       navigate("/login", { state: { from: location }, replace: true });
     }
   }
+  function closeShareDialog() {
+    setOpenShare(false);
+  }
+
   return (
     <main className="single-product-page p-3">
       {loading && <Loader />}
@@ -186,7 +192,24 @@ export function SingleProductPage() {
           <div className="details-section p-3">
             <div className="detail-section-header">
               <h3 className="product-title heading h2">{product.title}</h3>
-              {/* <i className="btn-icon btn-sm material-icons">share</i> */}
+              <i
+                className="btn-icon btn-sm material-icons"
+                onClick={(event) => {
+                  event.preventDefault();
+                  setOpenShare(true);
+                }}
+              >
+                share
+              </i>
+              {openShare && (
+                <ShareProduct
+                  close={closeShareDialog}
+                  productLink={window.location.href.replace(
+                    location.pathname,
+                    `/products/${product.id}`
+                  )}
+                />
+              )}
             </div>
             <div className="rating-read-only single-product-rating">
               <p className=" txt txt-bold txt-gray px-2">{product.rating}</p>
