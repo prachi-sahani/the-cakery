@@ -14,7 +14,7 @@ export const products = [
     price: 649,
     discount: 50,
     categoryName: "CAKES",
-    image: "assets/product-red-velvet-cake.jpg",
+    image: "assets/product-red-velvet-cake.webp",
     rating: 5,
     tag: "BESTSELLER",
     careInstructions: `Store cream cakes in a refrigerator.
@@ -38,7 +38,7 @@ export const products = [
     price: 699,
     discount: 50,
     categoryName: "CAKES",
-    image: "assets/ravishing-truffle-chocolate-cake.png",
+    image: "assets/ravishing-truffle-chocolate-cake.webp",
     rating: 4.4,
     tag: "",
     careInstructions: `Store cream cakes in a refrigerator.
@@ -62,7 +62,7 @@ export const products = [
     price: 649,
     discount: 25,
     categoryName: "PASTRIES",
-    image: "assets/choco-chip-truffle-n-kitkat-delight-pastries.png",
+    image: "assets/choco-chip-truffle-n-kitkat-delight-pastries.webp",
     rating: 3.3,
     tag: "",
     careInstructions: `Store pastry in a refrigerator. Serve the pastry at room temperature and make sure it is not exposed to heat.
@@ -82,7 +82,7 @@ export const products = [
     price: 149,
     discount: 50,
     categoryName: "JAR DESERTS",
-    image: "assets/red-velvet-single-jar-cake.png",
+    image: "assets/red-velvet-single-jar-cake.webp",
     rating: 2.4,
     tag: "BESTSELLER",
     careInstructions: "",
@@ -99,7 +99,7 @@ export const products = [
     price: 699,
     discount: 25,
     categoryName: "CAKES",
-    image: "assets/chocolaty-creamy-round-cake.png",
+    image: "assets/chocolaty-creamy-round-cake.webp",
     rating: 4.3,
     tag: "",
     careInstructions: `Store cream cakes in a refrigerator.
@@ -123,7 +123,7 @@ export const products = [
     price: 149,
     discount: 25,
     categoryName: "PASTRIES",
-    image: "assets/chocolate-truffle-pastry.png",
+    image: "assets/chocolate-truffle-pastry.webp",
     rating: 4,
     tag: "",
     careInstructions: `Store pastry in a refrigerator. Serve the pastry at room temperature and make sure it is not exposed to heat.
@@ -143,7 +143,7 @@ export const products = [
     price: 649,
     discount: 25,
     categoryName: "BROWNIES",
-    image: "assets/set-of-6-choco-love-brownies.png",
+    image: "assets/set-of-6-choco-love-brownies.webp",
     rating: 4.6,
     tag: "",
     careInstructions: `Place the brownies in an airtight container that is large enough to fit the brownies in layers.
@@ -164,7 +164,7 @@ export const products = [
     price: 1499,
     discount: 100,
     categoryName: "GIFT HAMPER",
-    image: "assets/delicious-cake-and-cookie-hamper.png",
+    image: "assets/delicious-cake-and-cookie-hamper.webp",
     rating: 4.1,
     tag: "",
     careInstructions: `Store the eatables in an air tight container at room temperature.
@@ -183,7 +183,7 @@ export const products = [
     price: 599,
     discount: 50,
     categoryName: "PASTRIES",
-    image: "assets/6-blueberry-pineapple-vanilla-cupcakes.png",
+    image: "assets/6-blueberry-pineapple-vanilla-cupcakes.webp",
     rating: 4.3,
     tag: "",
     careInstructions: `Store pastry in a refrigerator. Serve the pastry at room temperature and make sure it is not exposed to heat.
@@ -203,7 +203,7 @@ export const products = [
     price: 199,
     discount: 25,
     categoryName: "PASTRIES",
-    image: "assets/layered-cocoa-choco-chip-pastry.png",
+    image: "assets/layered-cocoa-choco-chip-pastry.webp",
     rating: 4.8,
     tag: "",
     careInstructions: `Store pastry in a refrigerator. Serve the pastry at room temperature and make sure it is not exposed to heat.
@@ -223,7 +223,7 @@ export const products = [
     price: 499,
     discount: 25,
     categoryName: "CHOCOLATES",
-    image: "assets/celebration-round-chocolate-box.png",
+    image: "assets/celebration-round-chocolate-box.webp",
     rating: 3.8,
     tag: "",
     careInstructions: `Store your chocolates in the refrigerator.
