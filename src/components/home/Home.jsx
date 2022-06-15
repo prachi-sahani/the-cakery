@@ -36,7 +36,7 @@ export function Home() {
       {/* hero image */}
       <div className="hero-section">
         <div className="hero-text heading h2">
-          <img src="assets/hero-logo.png" alt="Cakery" />
+          <img src="assets/hero-logo.webp" alt="Cakery" />
           <em>Happiness in every bite!</em>
           <Link to="/products" className="btn-basic btn-primary btn-md link">
             Order Now
@@ -44,7 +44,7 @@ export function Home() {
         </div>
         <img
           className="img-hero"
-          src="assets/hero-image.jpg"
+          src="assets/hero-image.webp"
           alt="celebrations"
         ></img>
       </div>
