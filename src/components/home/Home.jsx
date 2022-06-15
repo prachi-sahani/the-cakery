@@ -36,14 +36,13 @@ export function Home() {
       {/* hero image */}
       <div className="hero-section">
         <div className="hero-text heading h2">
-          <img loading="lazy" src="assets/hero-logo.png" alt="Cakery" />
+          <img src="assets/hero-logo.png" alt="Cakery" />
           <em>Happiness in every bite!</em>
           <Link to="/products" className="btn-basic btn-primary btn-md link">
             Order Now
           </Link>
         </div>
         <img
-          loading="lazy"
           className="img-hero"
           src="assets/hero-image.jpg"
           alt="celebrations"
