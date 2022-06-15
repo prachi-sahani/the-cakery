@@ -165,6 +165,7 @@ export function SingleProductPage() {
         <Fragment>
           <div className="image-section p-3">
             <img
+              loading="lazy"
               src={`/${product.image}`}
               alt={product.title}
               className="w-100"

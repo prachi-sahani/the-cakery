@@ -68,6 +68,7 @@ export function CartItemCard({ item, calculatePriceDetails }) {
   return (
     <div className="card card-hz">
       <img
+        loading="lazy"
         alt={item.title}
         className="card-img"
         src={item.image}

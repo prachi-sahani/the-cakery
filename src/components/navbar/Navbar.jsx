@@ -13,6 +13,7 @@ export function Navbar() {
       <div className="navbar">
         <Link className="link" to="/">
           <img
+            loading="lazy"
             className="navbar-brand logo"
             src="/assets/logo.png"
             alt="Cakery"

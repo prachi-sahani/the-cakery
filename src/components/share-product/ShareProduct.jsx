@@ -68,12 +68,12 @@ export function ShareProduct({ close, productLink }) {
               key={item.title}
               className="txt-center"
             >
-              <img src={item.icon} alt={`Share on ${item.title}`} />
+              <img loading="lazy" src={item.icon} alt={`Share on ${item.title}`} />
               <p className=" txt-sm txt txt-gray">{item.title}</p>
             </div>
           ))}
           <div className="txt-center" onClick={copyLinkToClipboard}>
-            <img src="/assets/link.png" alt="Copy link" />
+            <img loading="lazy" src="/assets/link.png" alt="Copy link" />
             <p className=" txt-sm txt txt-gray">Copy link</p>
           </div>
         </div>

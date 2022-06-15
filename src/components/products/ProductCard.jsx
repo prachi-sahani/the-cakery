@@ -117,7 +117,7 @@ export function ProductCard({ product }) {
       className="product-card card card-w-badge"
     >
       <div className="card-image">
-        <img alt="" className="card-img product-image" src={product.image} />
+        <img loading="lazy" alt="" className="card-img product-image" src={product.image} />
         {product.tag && (
           <div className="badge badge-bestseller">{product.tag}</div>
         )}

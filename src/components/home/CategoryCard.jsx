@@ -18,6 +18,7 @@ export function CategoryCard({category}){
     return(
         <div onClick={() => openCategoryPage(category.categoryIdentity)} className="link card card-basic">
         <img
+          loading="lazy"
           className="card-content"
           src={category.image}
           alt="cakes"

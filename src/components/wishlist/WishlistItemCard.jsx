@@ -88,6 +88,7 @@ export function WishlistItemCard({ product }) {
       </div>
       <div className="card-image">
         <img
+          loading="lazy"
           alt={product.title}
           className="card-img product-image"
           src={product.image}
