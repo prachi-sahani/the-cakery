@@ -135,9 +135,9 @@ export function LoginPage() {
         </form>
         <div className="card-footer">
           <div className="action-button">
-            <Link to="/" className="btn-link btn-link-basic">
+            {/* <Link to="/" className="btn-link btn-link-basic">
               FORGOT PASSWORD?
-            </Link>
+            </Link> */}
           </div>
           <div className="action-icons txt-gray">
             NEW USER?

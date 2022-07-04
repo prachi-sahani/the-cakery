@@ -85,6 +85,16 @@ export function SignupPage() {
     }));
   }
 
+  function fillTestDetails() {
+    setSignupForm({
+      firstName: "Sample",
+      lastName: "User",
+      email: "sample.user@email.com",
+      password: "123456",
+      confirmPassword: "123456",
+    });
+  }
+
   return (
     <main className="auth-page">
       <div className="card card-basic auth-card">
@@ -107,6 +117,7 @@ export function SignupPage() {
               type="text"
               autoComplete="off"
               name="firstName"
+              value={signupForm.firstName}
               placeholder="John"
               id="firstName"
               onChange={(e) => inputChangeHandler(e, "firstName")}
@@ -123,6 +134,7 @@ export function SignupPage() {
               type="text"
               autoComplete="off"
               name="lastName"
+              value={signupForm.lastName}
               placeholder="Doe"
               id="lastName"
               onChange={(e) => inputChangeHandler(e, "lastName")}
@@ -138,6 +150,7 @@ export function SignupPage() {
               className="input-outline w-100"
               type="email"
               autoComplete="off"
+              value={signupForm.email}
               name="emailID"
               placeholder="delicious_desserts@email.com"
               id="emailID"
@@ -154,6 +167,7 @@ export function SignupPage() {
               className="input-outline w-100"
               type={showPassword ? "text" : "password"}
               name="password"
+              value={signupForm.password}
               placeholder="*******"
               id="password"
               onChange={(e) => inputChangeHandler(e, "password")}
@@ -176,6 +190,7 @@ export function SignupPage() {
               className="input-outline w-100"
               type={showConfirmPassword ? "text" : "password"}
               name="confirm-password"
+              value={signupForm.confirmPassword}
               placeholder="*******"
               id="confirm-password"
               onChange={(e) => inputChangeHandler(e, "confirmPassword")}
@@ -204,13 +219,16 @@ export function SignupPage() {
           >
             {!isLoadingSignup ? "Register" : "Loading..."}
           </button>
+          <br />
+          <button
+            type="button"
+            className="btn-basic btn-outline-primary btn-auth my-3"
+            onClick={fillTestDetails}
+          >
+            Fill Test Details
+          </button>
         </form>
         <div className="card-footer">
-          <div className="action-button">
-            <Link to="/" className="btn-link btn-link-basic">
-              FORGOT PASSWORD?
-            </Link>
-          </div>
           <div className="action-icons">
             ALREADY REGISTERED?
             <Link
